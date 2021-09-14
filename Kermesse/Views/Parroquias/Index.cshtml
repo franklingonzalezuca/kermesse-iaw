@@ -1,0 +1,58 @@
+﻿@model IEnumerable<Kermesse.Models.Parroquia>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Mostrando todas las parroquias</h2>
+
+<p>
+    @Html.ActionLink("Crear nueva parroquia", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            Nombre
+        </th>
+        <th>
+            Dirección
+        </th>
+        <th>
+            Teléfono
+        </th>
+        <th>
+            Logo
+        </th>
+        <th>
+            Sitio web
+        </th>
+        <th>Acciones</th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.nombre)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.direccion)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.telefono)
+        </td>
+        <td>
+            <img src="@Html.DisplayFor(modelItem => item.logo)" style="width: 50px" />
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.sitio_web)
+        </td>
+        <td>
+            @Html.ActionLink("Editar", "Edit", new { id=item.idParroquia }) |
+            @Html.ActionLink("Detalles", "Details", new { id=item.idParroquia }) |
+            @Html.ActionLink("Eliminar", "Delete", new { id=item.idParroquia })
+        </td>
+    </tr>
+}
+
+</table>

@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="9e2109fc0f534b66bbb9873f102870ab" Name="Diagram1">
+        <EntityTypeShape EntityType="kermesseModel.ArqueoCaja" Width="1.5" PointX="5.25" PointY="7.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="kermesseModel.ArqueoCajaDet" Width="1.5" PointX="7.5" PointY="7.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="kermesseModel.CategoriaGasto" Width="1.5" PointX="6" PointY="19.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="kermesseModel.CategoriaProducto" Width="1.5" PointX="3" PointY="27.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="kermesseModel.Comunidad" Width="1.5" PointX="3" PointY="16.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="kermesseModel.ControlBono" Width="1.5" PointX="0.75" PointY="20.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="kermesseModel.Denominacion" Width="1.5" PointX="5.25" PointY="4" IsExpanded="true" />
+        <EntityTypeShape EntityType="kermesseModel.Gasto" Width="1.5" PointX="8.25" PointY="11.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="kermesseModel.IngresoComunidad" Width="1.5" PointX="5.25" PointY="14.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="kermesseModel.IngresoComunidadDet" Width="1.5" PointX="3" PointY="20" IsExpanded="true" />
+        <EntityTypeShape EntityType="kermesseModel.Kermesse" Width="1.5" PointX="3" PointY="10.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="kermesseModel.ListaPrecio" Width="1.5" PointX="5.25" PointY="23" IsExpanded="true" />
+        <EntityTypeShape EntityType="kermesseModel.ListaPrecioDet" Width="1.5" PointX="7.5" PointY="23.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="kermesseModel.Moneda" Width="1.5" PointX="3" PointY="4" IsExpanded="true" />
+        <EntityTypeShape EntityType="kermesseModel.Opcione" Width="1.5" PointX="3.75" PointY="31.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="kermesseModel.Parroquia" Width="1.5" PointX="0.75" PointY="7.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="kermesseModel.Producto" Width="1.5" PointX="5.25" PointY="26.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="kermesseModel.Rol" Width="1.5" PointX="3.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="kermesseModel.RolOpcione" Width="1.5" PointX="6" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="kermesseModel.RolUsuario" Width="1.5" PointX="6" PointY="11.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="kermesseModel.sysdiagram" Width="1.5" PointX="9.75" PointY="7.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="kermesseModel.TasaCambio" Width="1.5" PointX="8.25" PointY="3.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="kermesseModel.TasaCambioDetalle" Width="1.5" PointX="6" PointY="31.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="kermesseModel.Usuario" Width="1.5" PointX="0.75" PointY="11.375" IsExpanded="true" />
+        <AssociationConnector Association="kermesseModel.FK_ArqueoCaja_Kermesse" ManuallyRouted="false" />
+        <AssociationConnector Association="kermesseModel.FK_ArqueoCajaDet_ArqueoCaja" ManuallyRouted="false" />
+        <AssociationConnector Association="kermesseModel.FK_ArqueoCajaDet_Denominacion" ManuallyRouted="false" />
+        <AssociationConnector Association="kermesseModel.FK_ArqueoCajaDet_Moneda" ManuallyRouted="false" />
+        <AssociationConnector Association="kermesseModel.FK_Gastos_CategoriaGastos" ManuallyRouted="false" />
+        <AssociationConnector Association="kermesseModel.FK_Productos_CategoriaProducto" ManuallyRouted="false" />
+        <AssociationConnector Association="kermesseModel.FK_IngresoComunidad_Comunidad" ManuallyRouted="false" />
+        <AssociationConnector Association="kermesseModel.FK_Productos_Comunidad" ManuallyRouted="false" />
+        <AssociationConnector Association="kermesseModel.FK_IngresoComunidadDet_ControlBonos" ManuallyRouted="false" />
+        <AssociationConnector Association="kermesseModel.FK_Denominacion_Moneda" ManuallyRouted="false" />
+        <AssociationConnector Association="kermesseModel.FK_Gastos_Kermesse" ManuallyRouted="false" />
+        <AssociationConnector Association="kermesseModel.FK_IngresoComunidad_IngresoComunidadDet" ManuallyRouted="false" />
+        <AssociationConnector Association="kermesseModel.FK_IngresoComunidad_Kermesse" ManuallyRouted="false" />
+        <AssociationConnector Association="kermesseModel.FK_Kermesse_Parroquia" ManuallyRouted="false" />
+        <AssociationConnector Association="kermesseModel.FK_Kermesse_Usuarios" ManuallyRouted="false" />
+        <AssociationConnector Association="kermesseModel.FK_ListaPrecio_Kermesse" ManuallyRouted="false" />
+        <AssociationConnector Association="kermesseModel.FK_ListaPrecioDet_ListaPrecio" ManuallyRouted="false" />
+        <AssociationConnector Association="kermesseModel.FK_ListaPrecioDet_Productos" ManuallyRouted="false" />
+        <AssociationConnector Association="kermesseModel.FK_TasaCambio_Moneda" ManuallyRouted="false" />
+        <AssociationConnector Association="kermesseModel.FK_RolOpciones_Opciones" ManuallyRouted="false" />
+        <AssociationConnector Association="kermesseModel.FK_RolOpciones_Rol" ManuallyRouted="false" />
+        <AssociationConnector Association="kermesseModel.FK_RolUsuario_Rol" ManuallyRouted="false" />
+        <AssociationConnector Association="kermesseModel.FK_RolUsuario_Usuarios" ManuallyRouted="false" />
+        <AssociationConnector Association="kermesseModel.FK_TasaCambio_TasaCambioDetalle" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

@@ -1,0 +1,67 @@
+﻿@model Kermesse.Models.Parroquia
+
+@{
+    ViewBag.Title = "Detalles";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Mostrando parroquia @Html.DisplayFor(model => model.nombre)</h2>
+
+<div>
+    <h4>Parroquia</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            Nombre
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.nombre)
+        </dd>
+
+        <dt>
+            Dirección
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.direccion)
+        </dd>
+
+        <dt>
+            Teléfono
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.telefono)
+        </dd>
+
+        <dt>
+            Logo
+        </dt>
+
+        <dd>
+            <img src="@Html.DisplayFor(model => model.logo)" style="width: 50px" />
+        </dd>
+
+        <dt>
+            Enlace del logo
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.logo)
+        </dd>
+
+        <dt>
+            Sitio web
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.sitio_web)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Editar", "Edit", new { id = Model.idParroquia }) |
+    @Html.ActionLink("Regresar a la lista", "Index")
+</p>

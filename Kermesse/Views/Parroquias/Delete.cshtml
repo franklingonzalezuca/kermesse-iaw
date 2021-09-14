@@ -1,0 +1,73 @@
+﻿@model Kermesse.Models.Parroquia
+
+@{
+    ViewBag.Title = "Eliminar";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Eliminando @Html.DisplayFor(model => model.nombre)</h2>
+
+<h3>¿Estás seguro que quieres eliminar @Html.DisplayFor(model => model.nombre)?</h3>
+<div>
+    <h4>Parroquia</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            Nombre
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.nombre)
+        </dd>
+
+        <dt>
+            Dirección
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.direccion)
+        </dd>
+
+        <dt>
+            Teléfono
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.telefono)
+        </dd>
+
+        <dt>
+            Logo
+        </dt>
+
+        <dd>
+            <img src="@Html.DisplayFor(model => model.logo)" style="width: 50px" />
+        </dd>
+
+        <dt>
+            Enlace del logo
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.logo)
+        </dd>
+
+        <dt>
+            Sitio web
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.sitio_web)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Eliminar" class="btn btn-default" /> |
+            @Html.ActionLink("Regresar a la lista", "Index")
+        </div>
+    }
+</div>

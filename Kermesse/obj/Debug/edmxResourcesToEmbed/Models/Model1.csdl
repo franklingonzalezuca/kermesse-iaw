@@ -1,0 +1,769 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="kermesseModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="ArqueoCaja">
+    <Key>
+      <PropertyRef Name="idArqueoCaja" />
+    </Key>
+    <Property Name="idArqueoCaja" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="idKermesse" Type="Int32" Nullable="false" />
+    <Property Name="fechaArqueo" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="granTotal" Type="Double" Nullable="false" />
+    <Property Name="usuarioCreacion" Type="Int32" Nullable="false" />
+    <Property Name="fechaCreacion" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="usuarioModificacion" Type="Int32" />
+    <Property Name="fechaModificacion" Type="DateTime" Precision="3" />
+    <Property Name="usuarioEliminacion" Type="Int32" />
+    <Property Name="fechaEliminacion" Type="DateTime" Precision="3" />
+    <Property Name="estado" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Kermesse" Relationship="Self.FK_ArqueoCaja_Kermesse" FromRole="ArqueoCaja" ToRole="Kermesse" />
+    <NavigationProperty Name="ArqueoCajaDets" Relationship="Self.FK_ArqueoCajaDet_ArqueoCaja" FromRole="ArqueoCaja" ToRole="ArqueoCajaDet" />
+  </EntityType>
+  <EntityType Name="ArqueoCajaDet">
+    <Key>
+      <PropertyRef Name="idArqueoCajaDet" />
+    </Key>
+    <Property Name="idArqueoCajaDet" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="idArqueoCaja" Type="Int32" Nullable="false" />
+    <Property Name="idMoneda" Type="Int32" Nullable="false" />
+    <Property Name="idDenominacion" Type="Int32" Nullable="false" />
+    <Property Name="cantidad" Type="Double" Nullable="false" />
+    <Property Name="subtotal" Type="Double" Nullable="false" />
+    <NavigationProperty Name="ArqueoCaja" Relationship="Self.FK_ArqueoCajaDet_ArqueoCaja" FromRole="ArqueoCajaDet" ToRole="ArqueoCaja" />
+    <NavigationProperty Name="Denominacion" Relationship="Self.FK_ArqueoCajaDet_Denominacion" FromRole="ArqueoCajaDet" ToRole="Denominacion" />
+    <NavigationProperty Name="Moneda" Relationship="Self.FK_ArqueoCajaDet_Moneda" FromRole="ArqueoCajaDet" ToRole="Moneda" />
+  </EntityType>
+  <EntityType Name="CategoriaGasto">
+    <Key>
+      <PropertyRef Name="idCategoriaGastos" />
+    </Key>
+    <Property Name="idCategoriaGastos" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="nombreCategoria" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="descripcion" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="estado" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Gastos" Relationship="Self.FK_Gastos_CategoriaGastos" FromRole="CategoriaGastos" ToRole="Gastos" />
+  </EntityType>
+  <EntityType Name="CategoriaProducto">
+    <Key>
+      <PropertyRef Name="idCategoriaProducto" />
+    </Key>
+    <Property Name="idCategoriaProducto" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="descripcion" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="estado" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Productos" Relationship="Self.FK_Productos_CategoriaProducto" FromRole="CategoriaProducto" ToRole="Productos" />
+  </EntityType>
+  <EntityType Name="Comunidad">
+    <Key>
+      <PropertyRef Name="idComunidad" />
+    </Key>
+    <Property Name="idComunidad" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="responsable" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="descContribucion" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="estado" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="IngresoComunidads" Relationship="Self.FK_IngresoComunidad_Comunidad" FromRole="Comunidad" ToRole="IngresoComunidad" />
+    <NavigationProperty Name="Productos" Relationship="Self.FK_Productos_Comunidad" FromRole="Comunidad" ToRole="Productos" />
+  </EntityType>
+  <EntityType Name="ControlBono">
+    <Key>
+      <PropertyRef Name="idBono" />
+    </Key>
+    <Property Name="idBono" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="valor" Type="Double" Nullable="false" />
+    <Property Name="estado" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="IngresoComunidadDets" Relationship="Self.FK_IngresoComunidadDet_ControlBonos" FromRole="ControlBonos" ToRole="IngresoComunidadDet" />
+  </EntityType>
+  <EntityType Name="Denominacion">
+    <Key>
+      <PropertyRef Name="idDenominacion" />
+    </Key>
+    <Property Name="idDenominacion" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="idMoneda" Type="Int32" Nullable="false" />
+    <Property Name="valor" Type="Double" Nullable="false" />
+    <Property Name="valorLetras" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="estado" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="ArqueoCajaDets" Relationship="Self.FK_ArqueoCajaDet_Denominacion" FromRole="Denominacion" ToRole="ArqueoCajaDet" />
+    <NavigationProperty Name="Moneda" Relationship="Self.FK_Denominacion_Moneda" FromRole="Denominacion" ToRole="Moneda" />
+  </EntityType>
+  <EntityType Name="Gasto">
+    <Key>
+      <PropertyRef Name="idRegistroGastos" />
+    </Key>
+    <Property Name="idRegistroGastos" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="idKermesse" Type="Int32" Nullable="false" />
+    <Property Name="idCatGastos" Type="Int32" Nullable="false" />
+    <Property Name="fechaGasto" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="concepto" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="monto" Type="Double" Nullable="false" />
+    <Property Name="usuarioCreacion" Type="Int32" Nullable="false" />
+    <Property Name="fechaCreacion" Type="DateTime" Precision="3" />
+    <Property Name="usuarioModificacion" Type="Int32" Nullable="false" />
+    <Property Name="fechaModificacion" Type="DateTime" Precision="3" />
+    <Property Name="usuarioEliminacion" Type="Int32" Nullable="false" />
+    <Property Name="fechaEliminacion" Type="DateTime" Precision="3" />
+    <Property Name="estado" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="CategoriaGasto" Relationship="Self.FK_Gastos_CategoriaGastos" FromRole="Gastos" ToRole="CategoriaGastos" />
+    <NavigationProperty Name="Kermesse" Relationship="Self.FK_Gastos_Kermesse" FromRole="Gastos" ToRole="Kermesse" />
+  </EntityType>
+  <EntityType Name="IngresoComunidad">
+    <Key>
+      <PropertyRef Name="idIngresoComunidad" />
+    </Key>
+    <Property Name="idIngresoComunidad" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="idKermesse" Type="Int32" Nullable="false" />
+    <Property Name="idComunidad" Type="Int32" Nullable="false" />
+    <Property Name="idProducto" Type="Int32" Nullable="false" />
+    <Property Name="cantProductos" Type="Int32" Nullable="false" />
+    <Property Name="totalBonos" Type="Int32" Nullable="false" />
+    <Property Name="usuarioCreacion" Type="Int32" Nullable="false" />
+    <Property Name="fechaCreacion" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="usuarioModificacion" Type="Int32" />
+    <Property Name="fechaModificacion" Type="DateTime" Precision="3" />
+    <Property Name="usuarioEliminacion" Type="Int32" />
+    <Property Name="fechaEliminicacion" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="Comunidad" Relationship="Self.FK_IngresoComunidad_Comunidad" FromRole="IngresoComunidad" ToRole="Comunidad" />
+    <NavigationProperty Name="IngresoComunidadDet" Relationship="Self.FK_IngresoComunidad_IngresoComunidadDet" FromRole="IngresoComunidad" ToRole="IngresoComunidadDet" />
+    <NavigationProperty Name="Kermesse" Relationship="Self.FK_IngresoComunidad_Kermesse" FromRole="IngresoComunidad" ToRole="Kermesse" />
+  </EntityType>
+  <EntityType Name="IngresoComunidadDet">
+    <Key>
+      <PropertyRef Name="idIngresoComunidadDet" />
+    </Key>
+    <Property Name="idIngresoComunidadDet" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="idIngresoComunidad" Type="Int32" Nullable="false" />
+    <Property Name="idBono" Type="Int32" Nullable="false" />
+    <Property Name="denominacion" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="cantidad" Type="Int32" Nullable="false" />
+    <Property Name="subtotalBono" Type="Double" Nullable="false" />
+    <NavigationProperty Name="ControlBono" Relationship="Self.FK_IngresoComunidadDet_ControlBonos" FromRole="IngresoComunidadDet" ToRole="ControlBonos" />
+    <NavigationProperty Name="IngresoComunidads" Relationship="Self.FK_IngresoComunidad_IngresoComunidadDet" FromRole="IngresoComunidadDet" ToRole="IngresoComunidad" />
+  </EntityType>
+  <EntityType Name="Kermesse">
+    <Key>
+      <PropertyRef Name="idKermesse" />
+    </Key>
+    <Property Name="idKermesse" Type="Int32" Nullable="false" />
+    <Property Name="nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="fInicio" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="fFinal" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="descripcion" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="estado" Type="Int32" Nullable="false" />
+    <Property Name="tblEncargadoidEncargado" Type="Int32" Nullable="false" />
+    <Property Name="usuarioCreacion" Type="Int32" Nullable="false" />
+    <Property Name="fechaCreacion" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="usuarioModificacion" Type="Int32" />
+    <Property Name="fechaModificacion" Type="DateTime" Precision="3" />
+    <Property Name="usuarioEliminacion" Type="Int32" />
+    <Property Name="fechaEliminacion" Type="DateTime" Precision="3" />
+    <Property Name="idParroquia" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="ArqueoCajas" Relationship="Self.FK_ArqueoCaja_Kermesse" FromRole="Kermesse" ToRole="ArqueoCaja" />
+    <NavigationProperty Name="Gastos" Relationship="Self.FK_Gastos_Kermesse" FromRole="Kermesse" ToRole="Gastos" />
+    <NavigationProperty Name="IngresoComunidads" Relationship="Self.FK_IngresoComunidad_Kermesse" FromRole="Kermesse" ToRole="IngresoComunidad" />
+    <NavigationProperty Name="Parroquia" Relationship="Self.FK_Kermesse_Parroquia" FromRole="Kermesse" ToRole="Parroquia" />
+    <NavigationProperty Name="Usuario" Relationship="Self.FK_Kermesse_Usuarios" FromRole="Kermesse" ToRole="Usuarios" />
+    <NavigationProperty Name="ListaPrecios" Relationship="Self.FK_ListaPrecio_Kermesse" FromRole="Kermesse" ToRole="ListaPrecio" />
+  </EntityType>
+  <EntityType Name="ListaPrecio">
+    <Key>
+      <PropertyRef Name="idListaPrecio" />
+    </Key>
+    <Property Name="idListaPrecio" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="idKermesse" Type="Int32" Nullable="false" />
+    <Property Name="nombre" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="descripcion" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="estado" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Kermesse" Relationship="Self.FK_ListaPrecio_Kermesse" FromRole="ListaPrecio" ToRole="Kermesse" />
+    <NavigationProperty Name="ListaPrecioDets" Relationship="Self.FK_ListaPrecioDet_ListaPrecio" FromRole="ListaPrecio" ToRole="ListaPrecioDet" />
+  </EntityType>
+  <EntityType Name="ListaPrecioDet">
+    <Key>
+      <PropertyRef Name="idListaPrecioDet" />
+    </Key>
+    <Property Name="idListaPrecioDet" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="idListaPrecio" Type="Int32" Nullable="false" />
+    <Property Name="idProducto" Type="Int32" Nullable="false" />
+    <Property Name="precioVenta" Type="Double" Nullable="false" />
+    <NavigationProperty Name="ListaPrecio" Relationship="Self.FK_ListaPrecioDet_ListaPrecio" FromRole="ListaPrecioDet" ToRole="ListaPrecio" />
+    <NavigationProperty Name="Producto" Relationship="Self.FK_ListaPrecioDet_Productos" FromRole="ListaPrecioDet" ToRole="Productos" />
+  </EntityType>
+  <EntityType Name="Moneda">
+    <Key>
+      <PropertyRef Name="idMoneda" />
+    </Key>
+    <Property Name="idMoneda" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="signo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="estado" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="ArqueoCajaDets" Relationship="Self.FK_ArqueoCajaDet_Moneda" FromRole="Moneda" ToRole="ArqueoCajaDet" />
+    <NavigationProperty Name="Denominacions" Relationship="Self.FK_Denominacion_Moneda" FromRole="Moneda" ToRole="Denominacion" />
+    <NavigationProperty Name="TasaCambios" Relationship="Self.FK_TasaCambio_Moneda" FromRole="Moneda" ToRole="TasaCambio" />
+  </EntityType>
+  <EntityType Name="Opcione">
+    <Key>
+      <PropertyRef Name="idOpciones" />
+    </Key>
+    <Property Name="idOpciones" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="opcionDescripcion" Type="String" MaxLength="70" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="estado" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="RolOpciones" Relationship="Self.FK_RolOpciones_Opciones" FromRole="Opciones" ToRole="RolOpciones" />
+  </EntityType>
+  <EntityType Name="Parroquia">
+    <Key>
+      <PropertyRef Name="idParroquia" />
+    </Key>
+    <Property Name="idParroquia" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="nombre" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="direccion" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="telefono" Type="String" MaxLength="15" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="logo" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="sitio_web" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Kermesses" Relationship="Self.FK_Kermesse_Parroquia" FromRole="Parroquia" ToRole="Kermesse" />
+  </EntityType>
+  <EntityType Name="Producto">
+    <Key>
+      <PropertyRef Name="idProducto" />
+    </Key>
+    <Property Name="idProducto" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="idComunidad" Type="Int32" Nullable="false" />
+    <Property Name="idCatProducto" Type="Int32" Nullable="false" />
+    <Property Name="nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="descripcion" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="cantidad" Type="Int32" Nullable="false" />
+    <Property Name="precioSugerido" Type="Double" Nullable="false" />
+    <Property Name="estado" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="CategoriaProducto" Relationship="Self.FK_Productos_CategoriaProducto" FromRole="Productos" ToRole="CategoriaProducto" />
+    <NavigationProperty Name="Comunidad" Relationship="Self.FK_Productos_Comunidad" FromRole="Productos" ToRole="Comunidad" />
+    <NavigationProperty Name="ListaPrecioDets" Relationship="Self.FK_ListaPrecioDet_Productos" FromRole="Productos" ToRole="ListaPrecioDet" />
+  </EntityType>
+  <EntityType Name="Rol">
+    <Key>
+      <PropertyRef Name="idRol" />
+    </Key>
+    <Property Name="idRol" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="rolDescripcion" Type="String" MaxLength="70" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="estado" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="RolOpciones" Relationship="Self.FK_RolOpciones_Rol" FromRole="Rol" ToRole="RolOpciones" />
+    <NavigationProperty Name="RolUsuarios" Relationship="Self.FK_RolUsuario_Rol" FromRole="Rol" ToRole="RolUsuario" />
+  </EntityType>
+  <EntityType Name="RolOpcione">
+    <Key>
+      <PropertyRef Name="idRolOpciones" />
+    </Key>
+    <Property Name="idRolOpciones" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="tblRolidRol" Type="Int32" Nullable="false" />
+    <Property Name="tblOpcionesidOpciones" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Opcione" Relationship="Self.FK_RolOpciones_Opciones" FromRole="RolOpciones" ToRole="Opciones" />
+    <NavigationProperty Name="Rol" Relationship="Self.FK_RolOpciones_Rol" FromRole="RolOpciones" ToRole="Rol" />
+  </EntityType>
+  <EntityType Name="RolUsuario">
+    <Key>
+      <PropertyRef Name="idRolUsuario" />
+    </Key>
+    <Property Name="idRolUsuario" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="tblUsuarioidUsuario" Type="Int32" Nullable="false" />
+    <Property Name="tblRolidRol" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Rol" Relationship="Self.FK_RolUsuario_Rol" FromRole="RolUsuario" ToRole="Rol" />
+    <NavigationProperty Name="Usuario" Relationship="Self.FK_RolUsuario_Usuarios" FromRole="RolUsuario" ToRole="Usuarios" />
+  </EntityType>
+  <EntityType Name="sysdiagram">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="TasaCambio">
+    <Key>
+      <PropertyRef Name="idTasaCambio" />
+    </Key>
+    <Property Name="idTasaCambio" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="fecha" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="estado" Type="Int32" Nullable="false" />
+    <Property Name="idMonedaO" Type="Int32" Nullable="false" />
+    <Property Name="idTasaCambioDetalle" Type="Int32" Nullable="false" />
+    <Property Name="idMonedaC" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Moneda" Relationship="Self.FK_TasaCambio_Moneda" FromRole="TasaCambio" ToRole="Moneda" />
+    <NavigationProperty Name="TasaCambioDetalle" Relationship="Self.FK_TasaCambio_TasaCambioDetalle" FromRole="TasaCambio" ToRole="TasaCambioDetalle" />
+  </EntityType>
+  <EntityType Name="TasaCambioDetalle">
+    <Key>
+      <PropertyRef Name="idTasaCambioDetalle" />
+    </Key>
+    <Property Name="idTasaCambioDetalle" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="idTasaCambio" Type="Int32" Nullable="false" />
+    <Property Name="fecha" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="tipoCambio" Type="Double" Nullable="false" />
+    <Property Name="estado" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="TasaCambios" Relationship="Self.FK_TasaCambio_TasaCambioDetalle" FromRole="TasaCambioDetalle" ToRole="TasaCambio" />
+  </EntityType>
+  <EntityType Name="Usuario">
+    <Key>
+      <PropertyRef Name="idUsuario" />
+    </Key>
+    <Property Name="idUsuario" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="usuario1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="pwd" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="nombres" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="apellidos" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="estado" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Kermesses" Relationship="Self.FK_Kermesse_Usuarios" FromRole="Usuarios" ToRole="Kermesse" />
+    <NavigationProperty Name="RolUsuarios" Relationship="Self.FK_RolUsuario_Usuarios" FromRole="Usuarios" ToRole="RolUsuario" />
+  </EntityType>
+  <Association Name="FK_ArqueoCaja_Kermesse">
+    <End Role="Kermesse" Type="Self.Kermesse" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="ArqueoCaja" Type="Self.ArqueoCaja" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Kermesse">
+        <PropertyRef Name="idKermesse" />
+      </Principal>
+      <Dependent Role="ArqueoCaja">
+        <PropertyRef Name="idKermesse" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ArqueoCajaDet_ArqueoCaja">
+    <End Role="ArqueoCaja" Type="Self.ArqueoCaja" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="ArqueoCajaDet" Type="Self.ArqueoCajaDet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ArqueoCaja">
+        <PropertyRef Name="idArqueoCaja" />
+      </Principal>
+      <Dependent Role="ArqueoCajaDet">
+        <PropertyRef Name="idArqueoCaja" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ArqueoCajaDet_Denominacion">
+    <End Role="Denominacion" Type="Self.Denominacion" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="ArqueoCajaDet" Type="Self.ArqueoCajaDet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Denominacion">
+        <PropertyRef Name="idDenominacion" />
+      </Principal>
+      <Dependent Role="ArqueoCajaDet">
+        <PropertyRef Name="idDenominacion" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ArqueoCajaDet_Moneda">
+    <End Role="Moneda" Type="Self.Moneda" Multiplicity="1" />
+    <End Role="ArqueoCajaDet" Type="Self.ArqueoCajaDet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Moneda">
+        <PropertyRef Name="idMoneda" />
+      </Principal>
+      <Dependent Role="ArqueoCajaDet">
+        <PropertyRef Name="idMoneda" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Gastos_CategoriaGastos">
+    <End Role="CategoriaGastos" Type="Self.CategoriaGasto" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Gastos" Type="Self.Gasto" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CategoriaGastos">
+        <PropertyRef Name="idCategoriaGastos" />
+      </Principal>
+      <Dependent Role="Gastos">
+        <PropertyRef Name="idCatGastos" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Productos_CategoriaProducto">
+    <End Role="CategoriaProducto" Type="Self.CategoriaProducto" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Productos" Type="Self.Producto" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CategoriaProducto">
+        <PropertyRef Name="idCategoriaProducto" />
+      </Principal>
+      <Dependent Role="Productos">
+        <PropertyRef Name="idCatProducto" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_IngresoComunidad_Comunidad">
+    <End Role="Comunidad" Type="Self.Comunidad" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="IngresoComunidad" Type="Self.IngresoComunidad" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Comunidad">
+        <PropertyRef Name="idComunidad" />
+      </Principal>
+      <Dependent Role="IngresoComunidad">
+        <PropertyRef Name="idComunidad" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Productos_Comunidad">
+    <End Role="Comunidad" Type="Self.Comunidad" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Productos" Type="Self.Producto" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Comunidad">
+        <PropertyRef Name="idComunidad" />
+      </Principal>
+      <Dependent Role="Productos">
+        <PropertyRef Name="idComunidad" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_IngresoComunidadDet_ControlBonos">
+    <End Role="ControlBonos" Type="Self.ControlBono" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="IngresoComunidadDet" Type="Self.IngresoComunidadDet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ControlBonos">
+        <PropertyRef Name="idBono" />
+      </Principal>
+      <Dependent Role="IngresoComunidadDet">
+        <PropertyRef Name="idBono" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Denominacion_Moneda">
+    <End Role="Moneda" Type="Self.Moneda" Multiplicity="1" />
+    <End Role="Denominacion" Type="Self.Denominacion" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Moneda">
+        <PropertyRef Name="idMoneda" />
+      </Principal>
+      <Dependent Role="Denominacion">
+        <PropertyRef Name="idMoneda" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Gastos_Kermesse">
+    <End Role="Kermesse" Type="Self.Kermesse" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Gastos" Type="Self.Gasto" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Kermesse">
+        <PropertyRef Name="idKermesse" />
+      </Principal>
+      <Dependent Role="Gastos">
+        <PropertyRef Name="idKermesse" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_IngresoComunidad_IngresoComunidadDet">
+    <End Role="IngresoComunidadDet" Type="Self.IngresoComunidadDet" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="IngresoComunidad" Type="Self.IngresoComunidad" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="IngresoComunidadDet">
+        <PropertyRef Name="idIngresoComunidadDet" />
+      </Principal>
+      <Dependent Role="IngresoComunidad">
+        <PropertyRef Name="idComunidad" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_IngresoComunidad_Kermesse">
+    <End Role="Kermesse" Type="Self.Kermesse" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="IngresoComunidad" Type="Self.IngresoComunidad" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Kermesse">
+        <PropertyRef Name="idKermesse" />
+      </Principal>
+      <Dependent Role="IngresoComunidad">
+        <PropertyRef Name="idKermesse" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Kermesse_Parroquia">
+    <End Role="Parroquia" Type="Self.Parroquia" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Kermesse" Type="Self.Kermesse" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Parroquia">
+        <PropertyRef Name="idParroquia" />
+      </Principal>
+      <Dependent Role="Kermesse">
+        <PropertyRef Name="idParroquia" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Kermesse_Usuarios">
+    <End Role="Usuarios" Type="Self.Usuario" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Kermesse" Type="Self.Kermesse" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Usuarios">
+        <PropertyRef Name="idUsuario" />
+      </Principal>
+      <Dependent Role="Kermesse">
+        <PropertyRef Name="tblEncargadoidEncargado" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ListaPrecio_Kermesse">
+    <End Role="Kermesse" Type="Self.Kermesse" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="ListaPrecio" Type="Self.ListaPrecio" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Kermesse">
+        <PropertyRef Name="idKermesse" />
+      </Principal>
+      <Dependent Role="ListaPrecio">
+        <PropertyRef Name="idKermesse" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ListaPrecioDet_ListaPrecio">
+    <End Role="ListaPrecio" Type="Self.ListaPrecio" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="ListaPrecioDet" Type="Self.ListaPrecioDet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ListaPrecio">
+        <PropertyRef Name="idListaPrecio" />
+      </Principal>
+      <Dependent Role="ListaPrecioDet">
+        <PropertyRef Name="idListaPrecio" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ListaPrecioDet_Productos">
+    <End Role="Productos" Type="Self.Producto" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="ListaPrecioDet" Type="Self.ListaPrecioDet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Productos">
+        <PropertyRef Name="idProducto" />
+      </Principal>
+      <Dependent Role="ListaPrecioDet">
+        <PropertyRef Name="idProducto" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TasaCambio_Moneda">
+    <End Role="Moneda" Type="Self.Moneda" Multiplicity="1" />
+    <End Role="TasaCambio" Type="Self.TasaCambio" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Moneda">
+        <PropertyRef Name="idMoneda" />
+      </Principal>
+      <Dependent Role="TasaCambio">
+        <PropertyRef Name="idMonedaO" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_RolOpciones_Opciones">
+    <End Role="Opciones" Type="Self.Opcione" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="RolOpciones" Type="Self.RolOpcione" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Opciones">
+        <PropertyRef Name="idOpciones" />
+      </Principal>
+      <Dependent Role="RolOpciones">
+        <PropertyRef Name="tblOpcionesidOpciones" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_RolOpciones_Rol">
+    <End Role="Rol" Type="Self.Rol" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="RolOpciones" Type="Self.RolOpcione" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Rol">
+        <PropertyRef Name="idRol" />
+      </Principal>
+      <Dependent Role="RolOpciones">
+        <PropertyRef Name="tblRolidRol" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_RolUsuario_Rol">
+    <End Role="Rol" Type="Self.Rol" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="RolUsuario" Type="Self.RolUsuario" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Rol">
+        <PropertyRef Name="idRol" />
+      </Principal>
+      <Dependent Role="RolUsuario">
+        <PropertyRef Name="tblRolidRol" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_RolUsuario_Usuarios">
+    <End Role="Usuarios" Type="Self.Usuario" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="RolUsuario" Type="Self.RolUsuario" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Usuarios">
+        <PropertyRef Name="idUsuario" />
+      </Principal>
+      <Dependent Role="RolUsuario">
+        <PropertyRef Name="tblUsuarioidUsuario" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TasaCambio_TasaCambioDetalle">
+    <End Role="TasaCambioDetalle" Type="Self.TasaCambioDetalle" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="TasaCambio" Type="Self.TasaCambio" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TasaCambioDetalle">
+        <PropertyRef Name="idTasaCambioDetalle" />
+      </Principal>
+      <Dependent Role="TasaCambio">
+        <PropertyRef Name="idTasaCambioDetalle" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="kermesseEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="ArqueoCajas" EntityType="Self.ArqueoCaja" />
+    <EntitySet Name="ArqueoCajaDets" EntityType="Self.ArqueoCajaDet" />
+    <EntitySet Name="CategoriaGastos" EntityType="Self.CategoriaGasto" />
+    <EntitySet Name="CategoriaProductoes" EntityType="Self.CategoriaProducto" />
+    <EntitySet Name="Comunidads" EntityType="Self.Comunidad" />
+    <EntitySet Name="ControlBonos" EntityType="Self.ControlBono" />
+    <EntitySet Name="Denominacions" EntityType="Self.Denominacion" />
+    <EntitySet Name="Gastos" EntityType="Self.Gasto" />
+    <EntitySet Name="IngresoComunidads" EntityType="Self.IngresoComunidad" />
+    <EntitySet Name="IngresoComunidadDets" EntityType="Self.IngresoComunidadDet" />
+    <EntitySet Name="Kermesses" EntityType="Self.Kermesse" />
+    <EntitySet Name="ListaPrecios" EntityType="Self.ListaPrecio" />
+    <EntitySet Name="ListaPrecioDets" EntityType="Self.ListaPrecioDet" />
+    <EntitySet Name="Monedas" EntityType="Self.Moneda" />
+    <EntitySet Name="Opciones" EntityType="Self.Opcione" />
+    <EntitySet Name="Parroquias" EntityType="Self.Parroquia" />
+    <EntitySet Name="Productos" EntityType="Self.Producto" />
+    <EntitySet Name="Rols" EntityType="Self.Rol" />
+    <EntitySet Name="RolOpciones" EntityType="Self.RolOpcione" />
+    <EntitySet Name="RolUsuarios" EntityType="Self.RolUsuario" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+    <EntitySet Name="TasaCambios" EntityType="Self.TasaCambio" />
+    <EntitySet Name="TasaCambioDetalles" EntityType="Self.TasaCambioDetalle" />
+    <EntitySet Name="Usuarios" EntityType="Self.Usuario" />
+    <AssociationSet Name="FK_ArqueoCaja_Kermesse" Association="Self.FK_ArqueoCaja_Kermesse">
+      <End Role="Kermesse" EntitySet="Kermesses" />
+      <End Role="ArqueoCaja" EntitySet="ArqueoCajas" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ArqueoCajaDet_ArqueoCaja" Association="Self.FK_ArqueoCajaDet_ArqueoCaja">
+      <End Role="ArqueoCaja" EntitySet="ArqueoCajas" />
+      <End Role="ArqueoCajaDet" EntitySet="ArqueoCajaDets" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ArqueoCajaDet_Denominacion" Association="Self.FK_ArqueoCajaDet_Denominacion">
+      <End Role="Denominacion" EntitySet="Denominacions" />
+      <End Role="ArqueoCajaDet" EntitySet="ArqueoCajaDets" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ArqueoCajaDet_Moneda" Association="Self.FK_ArqueoCajaDet_Moneda">
+      <End Role="Moneda" EntitySet="Monedas" />
+      <End Role="ArqueoCajaDet" EntitySet="ArqueoCajaDets" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Gastos_CategoriaGastos" Association="Self.FK_Gastos_CategoriaGastos">
+      <End Role="CategoriaGastos" EntitySet="CategoriaGastos" />
+      <End Role="Gastos" EntitySet="Gastos" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Productos_CategoriaProducto" Association="Self.FK_Productos_CategoriaProducto">
+      <End Role="CategoriaProducto" EntitySet="CategoriaProductoes" />
+      <End Role="Productos" EntitySet="Productos" />
+    </AssociationSet>
+    <AssociationSet Name="FK_IngresoComunidad_Comunidad" Association="Self.FK_IngresoComunidad_Comunidad">
+      <End Role="Comunidad" EntitySet="Comunidads" />
+      <End Role="IngresoComunidad" EntitySet="IngresoComunidads" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Productos_Comunidad" Association="Self.FK_Productos_Comunidad">
+      <End Role="Comunidad" EntitySet="Comunidads" />
+      <End Role="Productos" EntitySet="Productos" />
+    </AssociationSet>
+    <AssociationSet Name="FK_IngresoComunidadDet_ControlBonos" Association="Self.FK_IngresoComunidadDet_ControlBonos">
+      <End Role="ControlBonos" EntitySet="ControlBonos" />
+      <End Role="IngresoComunidadDet" EntitySet="IngresoComunidadDets" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Denominacion_Moneda" Association="Self.FK_Denominacion_Moneda">
+      <End Role="Moneda" EntitySet="Monedas" />
+      <End Role="Denominacion" EntitySet="Denominacions" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Gastos_Kermesse" Association="Self.FK_Gastos_Kermesse">
+      <End Role="Kermesse" EntitySet="Kermesses" />
+      <End Role="Gastos" EntitySet="Gastos" />
+    </AssociationSet>
+    <AssociationSet Name="FK_IngresoComunidad_IngresoComunidadDet" Association="Self.FK_IngresoComunidad_IngresoComunidadDet">
+      <End Role="IngresoComunidadDet" EntitySet="IngresoComunidadDets" />
+      <End Role="IngresoComunidad" EntitySet="IngresoComunidads" />
+    </AssociationSet>
+    <AssociationSet Name="FK_IngresoComunidad_Kermesse" Association="Self.FK_IngresoComunidad_Kermesse">
+      <End Role="Kermesse" EntitySet="Kermesses" />
+      <End Role="IngresoComunidad" EntitySet="IngresoComunidads" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Kermesse_Parroquia" Association="Self.FK_Kermesse_Parroquia">
+      <End Role="Parroquia" EntitySet="Parroquias" />
+      <End Role="Kermesse" EntitySet="Kermesses" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Kermesse_Usuarios" Association="Self.FK_Kermesse_Usuarios">
+      <End Role="Usuarios" EntitySet="Usuarios" />
+      <End Role="Kermesse" EntitySet="Kermesses" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ListaPrecio_Kermesse" Association="Self.FK_ListaPrecio_Kermesse">
+      <End Role="Kermesse" EntitySet="Kermesses" />
+      <End Role="ListaPrecio" EntitySet="ListaPrecios" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ListaPrecioDet_ListaPrecio" Association="Self.FK_ListaPrecioDet_ListaPrecio">
+      <End Role="ListaPrecio" EntitySet="ListaPrecios" />
+      <End Role="ListaPrecioDet" EntitySet="ListaPrecioDets" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ListaPrecioDet_Productos" Association="Self.FK_ListaPrecioDet_Productos">
+      <End Role="Productos" EntitySet="Productos" />
+      <End Role="ListaPrecioDet" EntitySet="ListaPrecioDets" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TasaCambio_Moneda" Association="Self.FK_TasaCambio_Moneda">
+      <End Role="Moneda" EntitySet="Monedas" />
+      <End Role="TasaCambio" EntitySet="TasaCambios" />
+    </AssociationSet>
+    <AssociationSet Name="FK_RolOpciones_Opciones" Association="Self.FK_RolOpciones_Opciones">
+      <End Role="Opciones" EntitySet="Opciones" />
+      <End Role="RolOpciones" EntitySet="RolOpciones" />
+    </AssociationSet>
+    <AssociationSet Name="FK_RolOpciones_Rol" Association="Self.FK_RolOpciones_Rol">
+      <End Role="Rol" EntitySet="Rols" />
+      <End Role="RolOpciones" EntitySet="RolOpciones" />
+    </AssociationSet>
+    <AssociationSet Name="FK_RolUsuario_Rol" Association="Self.FK_RolUsuario_Rol">
+      <End Role="Rol" EntitySet="Rols" />
+      <End Role="RolUsuario" EntitySet="RolUsuarios" />
+    </AssociationSet>
+    <AssociationSet Name="FK_RolUsuario_Usuarios" Association="Self.FK_RolUsuario_Usuarios">
+      <End Role="Usuarios" EntitySet="Usuarios" />
+      <End Role="RolUsuario" EntitySet="RolUsuarios" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TasaCambio_TasaCambioDetalle" Association="Self.FK_TasaCambio_TasaCambioDetalle">
+      <End Role="TasaCambioDetalle" EntitySet="TasaCambioDetalles" />
+      <End Role="TasaCambio" EntitySet="TasaCambios" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
